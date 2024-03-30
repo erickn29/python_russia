@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -16,6 +15,9 @@ class StackTool(BaseModel):
         verbose_name = "Стек"
         ordering = ("name",)
 
+    def __str__(self):
+        return self.name
+
 
 class City(BaseModel):
     name = models.CharField(max_length=32, verbose_name="Название", unique=True)
@@ -24,6 +26,9 @@ class City(BaseModel):
         verbose_name = "Город"
         verbose_name_plural = "Города"
         ordering = ("name",)
+
+    def __str__(self):
+        return self.name
 
 
 class Company(BaseModel):
@@ -43,6 +48,9 @@ class Company(BaseModel):
         verbose_name_plural = "Компании"
         ordering = ("name",)
         unique_together = ("city", "name")
+
+    def __str__(self):
+        return self.name
 
 
 class Vacancy(BaseModel):
@@ -81,6 +89,8 @@ class Vacancy(BaseModel):
         "vacancies.StackTool",
         related_name="vacancies",
         verbose_name="Стек",
+        null=True,
+        blank=True,
     )
     title = models.CharField(max_length=255, verbose_name="Заголовок")
     text = models.TextField(verbose_name="Описание", blank=True, null=True)
@@ -104,12 +114,16 @@ class Vacancy(BaseModel):
     )
     salary_from = models.FloatField(null=True, blank=True, verbose_name="Зарплата от")
     salary_to = models.FloatField(null=True, blank=True, verbose_name="Зарплата до")
+    link = models.URLField(null=True, blank=True, verbose_name="Ссылка на вакансию")
 
     class Meta:
         verbose_name = "Вакансия"
         verbose_name_plural = "Вакансии"
         ordering = ("salary_from", "salary_to")
         unique_together = ("title", "company")
+
+    def __str__(self):
+        return self.title
 
 
 class Resume(BaseModel):
@@ -131,6 +145,9 @@ class Resume(BaseModel):
         verbose_name = "Резюме"
         verbose_name_plural = "Резюме"
         unique_together = ("employee", "position", "speciality")
+
+    def __str__(self):
+        return self.position
 
     @property
     def get_experience(self):
@@ -160,3 +177,6 @@ class JobPlace(BaseModel):
     class Meta:
         verbose_name = "Место работы"
         verbose_name_plural = "Места работы"
+
+    def __str__(self):
+        return self.position

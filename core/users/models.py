@@ -37,6 +37,9 @@ class Employee(BaseModel):
         verbose_name_plural = "Работники"
         ordering = ("family",)
 
+    def __str__(self):
+        return f"{self.family} {self.given} {self.patronymic} {self.birthday}"
+
 
 class Employer(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -60,3 +63,6 @@ class Employer(BaseModel):
         verbose_name_plural = "Работодатели"
         ordering = ("company", "family")
         unique_together = ("company", "family", "given")
+
+    def __str__(self):
+        return f"{self.company}: {self.family} {self.given}"
