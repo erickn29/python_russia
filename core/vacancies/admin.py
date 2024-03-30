@@ -5,7 +5,10 @@ from vacancies.models import StackTool, City, Company, Vacancy, Resume, JobPlace
 
 @admin.register(StackTool)
 class StackToolAdmin(admin.ModelAdmin):
-    pass
+    def save_model(self, request, obj, form, change):
+        if obj.name:
+            obj.name = obj.name.replace(" ", "_").lower()
+        super().save_model(request, obj, form, change)
 
 
 @admin.register(City)
