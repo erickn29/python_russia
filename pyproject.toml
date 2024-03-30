@@ -1,0 +1,77 @@
+[tool.poetry]
+name = "geek-hunter"
+version = "0.1.0"
+description = ""
+authors = ["ya.novikov <arhdomain@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0.3"
+ruff = "^0.3.4"
+psycopg2-binary = "^2.9.9"
+requests = "^2.31.0"
+python-dotenv = "^1.0.1"
+celery = "^5.3.6"
+django-celery-beat = "^2.6.0"
+django-cors-headers = "^4.3.1"
+django-redis = "^5.4.0"
+djangorestframework = "^3.15.1"
+drf-yasg = "^1.21.7"
+faker = "^24.4.0"
+gunicorn = "^21.2.0"
+pre-commit = "^3.7.0"
+beautifulsoup4 = "^4.12.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+select = [
+    "E",
+    "F",
+    "W",
+    "N",
+    "D",
+    "UP",
+    "ANN",
+    "BLE",
+    "B",
+    "C4",
+    "DJ",
+    "ICN",
+    "PYI",
+    "RET",
+    "SIM",
+    "PL",
+]
+
+exclude = [
+    "migrations",
+    "__init__.py",
+    "asgi.py",
+    "wsgi.py",
+    "manage.py",
+    "settings.py",
+    "apps.py",
+]
+
+ignore = [
+    "D100",
+    "D107",
+    "D106",
+    "D400",
+    "D415",
+    "ANN101",
+    "DJ001",
+    "D105",
+    "D203",
+    "D213",
+    "PLR0912",
+    "PLR0915",
+]
+
+line-length = 88
