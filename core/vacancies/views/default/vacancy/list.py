@@ -1,5 +1,7 @@
 from django import template
+from django.http import Http404
 from django.template.defaultfilters import register
+from django.utils.translation import gettext
 from django.views.generic import ListView
 
 from vacancies.models import Vacancy
@@ -10,7 +12,6 @@ class VacancyListV1View(ListView):
     model = Vacancy
     paginate_by = 10
     template_name = "vacancy/list.html"
-    context_object_name = "objects_list"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -22,8 +23,10 @@ class VacancyListV1View(ListView):
     def get_queryset(self):
         return vacancy_queryset(self.request.GET)
 
-    # def get(self, request, *args, **kwargs):
-    #     pass
+    def get(self, request, *args, **kwargs):
+        if request.htmx:
+            self.template_name = "vacancy/partial.html"
+        return super().get(request, *args, **kwargs)
 
 
 @register.filter

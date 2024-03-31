@@ -13,21 +13,21 @@
     <title>{% block title %}Document{% endblock %}</title>
 </head>
 <body>
-    {% include "includes/navbar.html" %}
-    <div class="container my-4">
-        <div class="row">
-            <div class="col-lg-3">
-                {% block left_side %}
-                    {% if section == "vacancies-list" %}
-                    	{% include "includes/vacancy-filter.html" %}
-                    {% endif %}
-                {% endblock %}
-            </div>
-            <div class="col-lg-9">
-                {% block content %}
-                {% endblock %}
-            </div>
+{% include "includes/navbar.html" %}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-lg-3">
+            {% block left_side %}
+                {% if section == "vacancies-list" %}
+                    {% include "includes/vacancy-filter.html" %}
+                {% endif %}
+            {% endblock %}
+        </div>
+        <div class="col-lg-9">
+            {% block content %}
+            {% endblock %}
         </div>
     </div>
+</div>
 </body>
 </html>
