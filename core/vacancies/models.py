@@ -1,6 +1,30 @@
 from django.db import models
 
 
+class Language(models.TextChoices):
+    PYTHON = "python", "Python"
+    PHP = "php", "PHP"
+    JAVASCRIPT = "javascript", "JavaScript"
+    C_PP = "cpp", "C++"
+    C_SHARP = "csharp", "C#"
+    JAVA = "java", "Java"
+    GOLANG = "golang", "Go"
+    RUST = "rust", "Rust"
+    RUBY = "ruby", "Ruby"
+    SQL = "sql", "SQL"
+
+
+class Speciality(models.TextChoices):
+    DEVOPS = "DevOps-инженер"
+    ANALYTICS = "Аналитик"
+    DATA_SCIENTIST = "Дата-сайентист"
+    MENTOR = "Преподаватель"
+    DEVELOPER = "Программист"
+    LEAD = "Руководитель группы разработки"
+    SYSTEM_ADMINISTRATOR = "Системный администратор"
+    QA = "Тестировщик"
+
+
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -67,18 +91,6 @@ class Vacancy(BaseModel):
         SENIOR = "senior", "Сеньор"
         LEAD = "lead", "Лид"
 
-    class Language(models.TextChoices):
-        PYTHON = "python", "Python"
-        PHP = "php", "PHP"
-        JAVASCRIPT = "javascript", "JavaScript"
-        C_PP = "cpp", "C++"
-        C_SHARP = "csharp", "C#"
-        JAVA = "java", "Java"
-        GOLANG = "golang", "Go"
-        RUST = "rust", "Rust"
-        RUBY = "ruby", "Ruby"
-        SQL = "sql", "SQL"
-
     company = models.ForeignKey(
         "vacancies.Company",
         verbose_name="Компания",
@@ -89,12 +101,15 @@ class Vacancy(BaseModel):
         "vacancies.StackTool",
         related_name="vacancies",
         verbose_name="Стек",
-        null=True,
         blank=True,
     )
     title = models.CharField(max_length=255, verbose_name="Заголовок")
     text = models.TextField(verbose_name="Описание", blank=True, null=True)
-    speciality = models.CharField(max_length=255, verbose_name="Специализация")
+    speciality = models.CharField(
+        max_length=255,
+        verbose_name="Специализация",
+        choices=Speciality.choices,
+    )
     language = models.CharField(
         max_length=255,
         verbose_name="Язык программирования",
@@ -111,6 +126,10 @@ class Vacancy(BaseModel):
         choices=Grade.choices,
         blank=True,
         null=True,
+    )
+    is_remote = models.BooleanField(
+        default=False,
+        verbose_name="Можно работать удаленно",
     )
     salary_from = models.FloatField(null=True, blank=True, verbose_name="Зарплата от")
     salary_to = models.FloatField(null=True, blank=True, verbose_name="Зарплата до")
@@ -134,7 +153,16 @@ class Resume(BaseModel):
         verbose_name="Работник",
     )
     position = models.CharField(max_length=255, verbose_name="Желаемая должность")
-    speciality = models.CharField(max_length=255, verbose_name="Специальность")
+    speciality = models.CharField(
+        max_length=255,
+        verbose_name="Специальность",
+        choices=Speciality.choices,
+    )
+    language = models.CharField(
+        max_length=255,
+        verbose_name="Основной язык программирования",
+        choices=Language.choices,
+    )
     stack = models.ManyToManyField(
         "vacancies.StackTool",
         related_name="resumes",
@@ -169,7 +197,11 @@ class JobPlace(BaseModel):
         verbose_name="Резюме",
     )
     position = models.CharField(max_length=255, verbose_name="Должность")
-    speciality = models.CharField(max_length=255, verbose_name="Специальность")
+    speciality = models.CharField(
+        max_length=255,
+        verbose_name="Специальность",
+        choices=Speciality.choices,
+    )
     job_start = models.DateField(verbose_name="Дата приема")
     job_end = models.DateField(verbose_name="Дата увольнения", null=True, blank=True)
     description = models.TextField(verbose_name="Описание", blank=True, null=True)

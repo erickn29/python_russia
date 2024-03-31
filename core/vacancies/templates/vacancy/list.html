@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+    Найдено вакансий: {{ objects_list | length }}
+    <hr>
+    {% for object in objects_list %}
+        <div class="vacancy-card mb-4">
+            <div class="vacancy-card-title"><strong>{{ object.title }}</strong></div>
+            {% if object.salary_from and object.salary_to %}
+            	<div class="vacancy-card-salary">
+                    от: {{ object.salary_from|format_salary }} 
+                    до: {{ object.salary_to|format_salary }}
+                </div>
+            {% elif object.salary_from %}
+                <div class="vacancy-card-salary">
+                    от: {{ object.salary_from|format_salary }}
+                </div>
+            {% else %}
+                <div class="vacancy-card-salary">
+                    до: {{ object.salary_to|format_salary }}
+                </div>
+            {% endif %}
+            <div class="vacancy-card-stack">
+                {% for stack in object.stack.all %}
+                	<span class="vacancy-card-stack-item">
+                        {{ stack }}
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
