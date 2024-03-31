@@ -29,6 +29,24 @@
                     </span>
                 {% endfor %}
             </div>
+            <div class="vacancy-card-experience mb-2">
+                опыт: 
+                {{ object.get_experience_display }}
+            </div>
+            <div class="vacancy-card-city mb-2">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
+                {{ object.company.city.name }}
+            </div>
+            <div class="vacancy-card-company mb-2">
+                <i class="fa fa-building" aria-hidden="true"></i>
+                {{ object.company.name }}
+            </div>
+            {% if object.is_remote %}
+                <div class="vacancy-card-remote mb-2">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    Удаленная работа
+                </div>
+            {% endif %}
         </div>
     {% endfor %}
 </div>

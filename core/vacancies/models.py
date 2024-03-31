@@ -79,9 +79,9 @@ class Company(BaseModel):
 
 class Vacancy(BaseModel):
     class Experience(models.TextChoices):
-        NO_EXPERIENCE = "no_experience", "Без опыта"
-        BETWEEN_1_3 = "between_1_2", "От 1 до 3 лет"
-        BETWEEN_3_5 = "between_3_5", "От 3 до 5 лет"
+        NO_EXPERIENCE = "no_experience", "без опыта"
+        BETWEEN_1_3 = "between_1_2", "от 1 до 3 лет"
+        BETWEEN_3_5 = "between_3_5", "от 3 до 5 лет"
         MORE_THAN_5 = "more_than_5", "Более 5 лет"
 
     class Grade(models.TextChoices):

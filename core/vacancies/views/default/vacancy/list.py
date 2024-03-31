@@ -1,7 +1,4 @@
-from django import template
-from django.http import Http404
 from django.template.defaultfilters import register
-from django.utils.translation import gettext
 from django.views.generic import ListView
 
 from vacancies.models import Vacancy

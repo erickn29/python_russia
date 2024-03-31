@@ -1,7 +1,7 @@
-<form 
-    action="" 
-    hx-get="{% url 'vacancies-list' %}" 
-    class="mb-4 p-4" 
+<form
+    action=""
+    hx-get="{% url 'vacancies-list' %}"
+    class="mb-4 p-4"
     hx-target="#vacancies-list"
 >
     {{ form }}
@@ -9,3 +9,10 @@
         Искать
     </button>
 </form>
+
+<style>
+    form {
+        position: sticky;
+        top: 80px;
+    }
+</style>
