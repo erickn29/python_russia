@@ -9,13 +9,25 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/htmx.min.js' %}" defer></script>
     <title>{% block title %}Document{% endblock %}</title>
 </head>
 <body>
     {% include "includes/navbar.html" %}
     <div class="container my-4">
-        {% block content %}
-        {% endblock %}
+        <div class="row">
+            <div class="col-lg-3">
+                {% block left_side %}
+                    {% if section == "vacancies-list" %}
+                    	{% include "includes/vacancy-filter.html" %}
+                    {% endif %}
+                {% endblock %}
+            </div>
+            <div class="col-lg-9">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
     </div>
 </body>
 </html>

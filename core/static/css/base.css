@@ -1,9 +1,74 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 body {
     font-family: "Montserrat", sans-serif;
+    background: #1a1a1a;
+    color: #ffffffde;
+}
+
+form {
+    border: 1px solid #21a58269;
+    border-radius: 14px;
+}
+
+label {
+    display: inline-block;
+    font-size: .85rem;
+    font-weight: 500;
+}
+
+.btn-success {
+    background: #21a582;
+    width: 100%;
+}
+
+.btn-success:hover {
+    background: #1b8b6d;
 }
 
 .navbar {
-    background: #ffa973c2;
-    box-shadow: 0 0 3px coral;
+    background: rgba(26, 26, 26, 0.5);
+}
+
+.form-control {
+    background: #5f4c8f;
+    color: #ffffffde;
+    border: 1px solid #1a1a1a;
+    font-size: .85rem;
+}
+
+.form-control:focus {
+    background: #5f4c8f;
+    color: #ffffffde;
+    border: 1px solid #5f4c8f;
+    box-shadow: none;
+}
+
+.vacancy-card {
+    transition: .2s;
+}
+
+.vacancy-card:hover {
+    transition: .2s;
+    background: #1e1d21;
+}
+
+.vacancy-card-stack-item {
+    font-size: .75rem;
+    padding: 3px 5px;
+    background: #4721a5;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-right: 3px;
+}
+
+.vacancy-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+
+}
+
+.salary {
+    color: #21a582;
+    font-size: 1.2rem;
+    font-weight: 700;
 }

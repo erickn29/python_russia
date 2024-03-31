@@ -15,14 +15,14 @@ class Language(models.TextChoices):
 
 
 class Speciality(models.TextChoices):
-    DEVOPS = "DevOps-инженер"
-    ANALYTICS = "Аналитик"
-    DATA_SCIENTIST = "Дата-сайентист"
-    MENTOR = "Преподаватель"
-    DEVELOPER = "Программист"
-    LEAD = "Руководитель группы разработки"
-    SYSTEM_ADMINISTRATOR = "Системный администратор"
-    QA = "Тестировщик"
+    DEVOPS = "devops", "DevOps-инженер"
+    ANALYTICS = "analytics", "Аналитик"
+    DATA_SCIENTIST = "data-scientist", "Дата-сайентист"
+    MENTOR = "mentor", "Преподаватель"
+    DEVELOPER = "developer", "Программист"
+    LEAD = "lead", "Руководитель группы разработки"
+    SYSTEM_ADMINISTRATOR = "sysadmin", "Системный администратор"
+    QA = "qa", "Тестировщик"
 
 
 class BaseModel(models.Model):

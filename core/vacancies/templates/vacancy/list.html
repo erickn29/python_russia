@@ -1,31 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-    Найдено вакансий: {{ objects_list | length }}
-    <hr>
-    {% for object in objects_list %}
-        <div class="vacancy-card mb-4">
-            <div class="vacancy-card-title"><strong>{{ object.title }}</strong></div>
-            {% if object.salary_from and object.salary_to %}
-            	<div class="vacancy-card-salary">
-                    от: {{ object.salary_from|format_salary }} 
-                    до: {{ object.salary_to|format_salary }}
-                </div>
-            {% elif object.salary_from %}
-                <div class="vacancy-card-salary">
-                    от: {{ object.salary_from|format_salary }}
-                </div>
-            {% else %}
-                <div class="vacancy-card-salary">
-                    до: {{ object.salary_to|format_salary }}
-                </div>
-            {% endif %}
-            <div class="vacancy-card-stack">
-                {% for stack in object.stack.all %}
-                	<span class="vacancy-card-stack-item">
+    <div id="vacancies-list">
+        Найдено вакансий: {{ count }}
+        <hr>
+        {% for object in objects_list %}
+            <div class="vacancy-card mb-4 p-2">
+                <div class="vacancy-card-title mb-2">{{ object.title }}</div>
+                {% if object.salary_from and object.salary_to %}
+                    <div class="vacancy-card-salary mb-2">
+                        от: &nbsp;<span
+                            class="salary">{{ object.salary_from|format_salary }}</span>
+                        &nbsp;до: &nbsp;<span
+                            class="salary">{{ object.salary_to|format_salary }}</span>
+                    </div>
+                {% elif object.salary_from %}
+                    <div class="vacancy-card-salary mb-2">
+                        от: <span
+                            class="salary">{{ object.salary_from|format_salary }}</span>
+                    </div>
+                {% else %}
+                    <div class="vacancy-card-salary mb-2">
+                        до: <span
+                            class="salary">{{ object.salary_to|format_salary }}</span>
+                    </div>
+                {% endif %}
+                <div class="vacancy-card-stack mb-2">
+                    {% for stack in object.stack.all %}
+                        <span class="vacancy-card-stack-item">
                         {{ stack }}
                     </span>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock %}
