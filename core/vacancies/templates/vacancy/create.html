@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <form class="mb-4 p-4" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button class="btn btn-success" type="submit">Сохранить</button>
+    </form>
+    <style>
+        #id_vacancy-is_remote {
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+{% endblock %}

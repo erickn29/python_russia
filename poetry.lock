@@ -356,6 +356,19 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-betterforms"
+version = "2.0.0"
+description = "App for Django featuring improved form base classes."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-betterforms-2.0.0.tar.gz", hash = "sha256:43edd7a60a6b4cd838fd5e2425553b462f902d57f9f292d4e937125a87815a42"},
+]
+
+[package.dependencies]
+Django = ">=1.11"
+
+[[package]]
 name = "django-celery-beat"
 version = "2.6.0"
 description = "Database-backed Periodic Tasks."
@@ -1139,4 +1152,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "e134321c095ccfca096c5ea23092e3eb74058d9d82404b12ca4b56c0ec8449b9"
+content-hash = "fde08667dc88515d227c7e9e40527bc1aff8e7e4e92b12c88eaf75cfef69a57d"

@@ -3,6 +3,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+# from core.middleware import AddUserDataToFormMiddleware
+
 load_dotenv(f"{Path(__file__).resolve().parent.parent}/project_secrets/env/.env")
 
 # Build paths inside the project like this: BASE_DIR / "subdir".
@@ -38,6 +40,7 @@ THIRD_PARTY_APPS = [
     "django_celery_beat",
     "django_filters",
     "django_htmx",
+    "betterforms",
 ]
 
 INSTALLED_APPS = [
@@ -57,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    "core.middleware.AddUserDataToFormMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",

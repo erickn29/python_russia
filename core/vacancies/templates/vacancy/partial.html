@@ -3,7 +3,15 @@
     <hr>
     {% for object in object_list %}
         <div class="vacancy-card mb-4 p-2">
-            <div class="vacancy-card-title mb-2">{{ object.title }}</div>
+            <div class="vacancy-card-title mb-2">
+                {{ object.title }}
+                <span class="vacancy-title-text">
+                    {{ object.get_experience_display }}
+                </span>
+                {% if object.is_remote %}
+                    <span class="vacancy-title-text"> Удаленка</span>
+                {% endif %}
+            </div>
             {% if object.salary_from and object.salary_to %}
                 <div class="vacancy-card-salary mb-2">
                     от: &nbsp;<span
@@ -22,17 +30,15 @@
                         class="salary">{{ object.salary_to|format_salary }}</span>
                 </div>
             {% endif %}
-            <div class="vacancy-card-stack mb-2">
-                {% for stack in object.stack.all %}
-                    <span class="vacancy-card-stack-item">
+            {% if object.stack %}
+                <div class="vacancy-card-stack mb-2">
+                    {% for stack in object.stack.all %}
+                        <span class="vacancy-card-stack-item">
                         {{ stack }}
                     </span>
-                {% endfor %}
-            </div>
-            <div class="vacancy-card-experience mb-2">
-                опыт: 
-                {{ object.get_experience_display }}
-            </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
             <div class="vacancy-card-city mb-2">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
                 {{ object.company.city.name }}
@@ -41,12 +47,6 @@
                 <i class="fa fa-building" aria-hidden="true"></i>
                 {{ object.company.name }}
             </div>
-            {% if object.is_remote %}
-                <div class="vacancy-card-remote mb-2">
-                    <i class="fa fa-home" aria-hidden="true"></i>
-                    Удаленная работа
-                </div>
-            {% endif %}
         </div>
     {% endfor %}
 </div>

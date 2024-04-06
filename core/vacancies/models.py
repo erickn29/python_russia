@@ -33,7 +33,7 @@ class BaseModel(models.Model):
 
 
 class StackTool(BaseModel):
-    name = models.CharField(max_length=255, verbose_name="Название", unique=True)
+    name = models.CharField(max_length=255, verbose_name="Ключевые навыки", unique=True)
 
     class Meta:
         verbose_name = "Стек"
@@ -97,12 +97,6 @@ class Vacancy(BaseModel):
         on_delete=models.CASCADE,
         related_name="vacancies",
     )
-    stack = models.ManyToManyField(
-        "vacancies.StackTool",
-        related_name="vacancies",
-        verbose_name="Стек",
-        blank=True,
-    )
     title = models.CharField(max_length=255, verbose_name="Заголовок")
     text = models.TextField(verbose_name="Описание", blank=True, null=True)
     speciality = models.CharField(
@@ -133,13 +127,19 @@ class Vacancy(BaseModel):
     )
     salary_from = models.FloatField(null=True, blank=True, verbose_name="Зарплата от")
     salary_to = models.FloatField(null=True, blank=True, verbose_name="Зарплата до")
+    stack = models.ManyToManyField(
+        "vacancies.StackTool",
+        related_name="vacancies",
+        verbose_name="Стек",
+        blank=True,
+    )
     link = models.URLField(null=True, blank=True, verbose_name="Ссылка на вакансию")
 
     class Meta:
         verbose_name = "Вакансия"
         verbose_name_plural = "Вакансии"
         ordering = ("salary_from", "salary_to")
-        unique_together = ("title", "company")
+        unique_together = ("title", "company", "text", "speciality", "language", )
 
     def __str__(self):
         return self.title
